@@ -88,17 +88,50 @@ public class Principal {
                 int green9 = (pixel9 >> 8) & 0xFF;
                 int red9 = (pixel9 >> 16) & 0xFF;
                 
-                int bluefinal = (blue1 + blue2 + blue3 + blue4 + blue5 + blue6 + blue7 + blue8 + blue9)/9 ;
-                int redfinal = (red1 + red2 + red3 + red4 + red5 + red6 + red7 + red8 + red9)/9 ;
-                int greenfinal = (green1 + green2 + green3 + green4 + green5 + green6 + green7 + green8 + green9)/9 ;
+                // filtro 1
+//                int bluefinal = (blue1 + blue2 + blue3 + blue4 + blue5 + blue6 + blue7 + blue8 + blue9)/9 ;
+//                int redfinal = (red1 + red2 + red3 + red4 + red5 + red6 + red7 + red8 + red9)/9 ;
+//                int greenfinal = (green1 + green2 + green3 + green4 + green5 + green6 + green7 + green8 + green9)/9 ;
                 
+                // filtro passa-baixa 1/10                
+//                int bluefinal = (blue1*2 + blue2 + blue3 + blue4 + blue5 + blue6 + blue7 + blue8 + blue9)/10;
+//                int redfinal = (red1*2 + red2 + red3 + red4 + red5 + red6 + red7 + red8 + red9)/10;
+//                int greenfinal = (green1*2 + green2 + green3 + green4 + green5 + green6 + green7 + green8 + green9)/10;
+//                
+                // filtro passa-baixa 1/16
+//                int bluefinal = (blue1*2 + blue2 + blue3*2 + blue4 + blue5*2 + blue6*2 + blue7 + blue8*2 + blue9)/16;
+//                int redfinal = (red1*2 + red2 + red3*2 + red4 + red5*2 + red6*2 + red7 + red8*2 + red9)/16;
+//                int  greenfinal = (green1*2 + green2 + green3*2 + green4 + green5*2 + green6*2 + green7 + green8*2 + green9)/16;
+                
+                // filtro passa-alta 5
+//                int bluefinal = (blue1*5 + blue2*0 + blue3*(-1) + blue4*0 + blue5*(-1) + blue6*(-1) + blue7*0 + blue8*(-1) + blue9*0);
+//	            int redfinal = (red1*5 + red2*0 + red3*(-1) + red4*0 + red5*(-1) + red6*(-1) + red7*0 + red8*(-1) + red9*0);
+//	            int greenfinal = (green1*5 + green2*0 + green3*(-1) + green4*0 + green5*(-1) + green6*(-1) + green7*0 + green8*(-1) + green9*0);
+//	            
+	            // filtro passa-alta 9
+//	            int bluefinal = (blue1*9 + blue2*(-1) + blue3*(-1) + blue4*(-1) + blue5*(-1) + blue6*(-1) + blue7*(-1) + blue8*(-1) + blue9*(-1));
+//	            int redfinal = (red1*9 + red2*(-1) + red3*(-1) + red4*(-1) + red5*(-1) + red6*(-1) + red7*(-1) + red8*(-1) + red9*(-1));
+//	            int greenfinal = (green1*9 + green2*(-1) + green3*(-1) + green4*(-1) + green5*(-1) + green6*(-1) + green7*(-1) + green8*(-1) + green9*(-1));
+	            
+	            // filtro passa-alta 5 - 2
+//	            int bluefinal = (blue1*5 + blue2 + blue3*(-2) + blue4 + blue5*(-2) + blue6*(-2) + blue7 + blue8*(-2) + blue9);
+//	            int redfinal = (red1*5 + red2 + red3*(-2) + red4 + red5*(-2) + red6*(-2) + red7 + red8*(-2) + red9);
+//	            int greenfinal = (green1*5 + green2 + green3*(-2) + green4 + green5*(-2) + green6*(-2) + green7 + green8*(-2) + green9);
+	            
+                // filtro passa-alta norte
+	            int bluefinal = (blue1*2 + blue2 + blue3 + blue4 + blue5 + blue6 + blue7*(-1) + blue8*(-1) + blue9*(-1));
+	            int redfinal = (red1*2 + red2 + red3 + red4 + red5 + red6 + red7*(-1) + red8*(-1) + red9*(-1));
+	            int greenfinal = (green1*2 + green2 + green3 + green4 + green5 + green6 + green7*(-1) + green8*(-1) + green9*(-1) );
+	            
+	            
+              
                 int[] color = {redfinal, greenfinal, bluefinal};
                 outputRaster.setPixel(i, j, color);
             }
         }
         //Salva a imagem filtrada
         ni.setData(outputRaster);
-        ImageIO.write(ni, "JPEG", new File("image1.jpg"));
+        ImageIO.write(ni, "JPEG", new File("img-passa-alta-04.jpg"));
     }
     
 }
